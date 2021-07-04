@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yuka/theme/app_colors.dart';
 
 void main() {
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'OpenFoodFacts - Margot Rasamy',
       theme: ThemeData(
           fontFamily: 'Avenir',
           // This is the theme of your application.
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
-          primaryColor: AppColors.ecoScoreC),
+          primaryColor: AppColors.white),
       home: MyHomePage(title: 'OpenFoodFacts'),
     );
   }
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text('Mes Scans'),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -92,25 +93,44 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            SvgPicture.asset('../../res/svg/ill_empty.svg'),
             Text(
-              'You have pushed the button this many times:',
+              "Vous n'avez pas encore scanné de produit",
+              textAlign: TextAlign.center,
               style:
                   TextStyle(fontFamily: 'Avenir', fontWeight: FontWeight.w800),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            TextButton(
+                onPressed: _incrementCounter,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'COMMENCER',
+                      style: TextStyle(
+                          fontFamily: 'Avenir', fontWeight: FontWeight.w800),
+                    ),
+                    Icon(Icons.arrow_right_alt),
+                  ],
+                ),
+                style: OutlinedButton.styleFrom(
+                  primary: AppColors.blue,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(22.0))),
+                  backgroundColor: AppColors.yellow,
+                  padding: EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                ))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
