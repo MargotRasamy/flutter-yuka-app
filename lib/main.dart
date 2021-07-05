@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yuka/theme/app_colors.dart';
 
-import '../layouts/card.dart';
+import 'layouts/card.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           primaryColor: AppColors.white),
-      home: CardView(title: 'OpenFoodFacts'),
+      home: MyHomePage(title: 'OpenFoodFacts'),
     );
   }
 }
@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SvgPicture.asset('../../res/svg/ill_empty.svg'),
+            SvgPicture.asset('res/svg/ill_empty.svg'),
             Text(
               "Vous n'avez pas encore scanné de produit",
               textAlign: TextAlign.center,
@@ -106,7 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   TextStyle(fontFamily: 'Avenir', fontWeight: FontWeight.w800),
             ),
             TextButton(
-                onPressed: _incrementCounter,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => CardView()),
+                  );
+                },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
