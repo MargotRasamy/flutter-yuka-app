@@ -136,16 +136,13 @@ class ProductCharacteristicsDetails extends StatelessWidget {
             ? Column(children: <Widget>[
                 for (int i = 0; i < this.characteristicsDetails!.length; i++)
                   ProductField(
-                    label: this.characteristicsLabel![i],
-                    value: this.characteristicsDetails![i],
-                    divider: true,
-                  )
+                      label: this.characteristicsLabel![i],
+                      value: this.characteristicsDetails![i],
+                      divider: true,
+                      boldLabel: true)
               ])
             : ProductField(
-                label: 'Aucun',
-                value: '',
-                divider: true,
-              )
+                label: 'Aucun', value: '', divider: true, boldLabel: true)
       ],
     );
   }

@@ -315,12 +315,13 @@ class ProductField extends StatelessWidget {
   final String label;
   final String value;
   final bool divider;
+  final bool boldLabel;
 
-  ProductField({
-    required this.label,
-    required this.value,
-    this.divider = true,
-  });
+  ProductField(
+      {required this.label,
+      required this.value,
+      this.divider = true,
+      this.boldLabel = false});
 
   @override
   Widget build(BuildContext context) {
@@ -333,7 +334,11 @@ class ProductField extends StatelessWidget {
             children: [
               Expanded(
                 // flex: 1,
-                child: Text(label),
+                child: Text(label,
+                    style: this.boldLabel
+                        ? TextStyle(
+                            fontWeight: FontWeight.w700, color: AppColors.blue)
+                        : null),
               ),
               Expanded(
                 // flex: 1,
