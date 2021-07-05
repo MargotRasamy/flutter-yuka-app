@@ -106,7 +106,7 @@ class ProductDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProductTitle(),
+                ProductTitle(hasAltName: true),
                 const SizedBox(
                   height: 10.0,
                 ),
@@ -142,7 +142,8 @@ class ProductHolder extends InheritedWidget {
 }
 
 class ProductTitle extends StatelessWidget {
-  const ProductTitle({Key? key}) : super(key: key);
+  final bool hasAltName;
+  const ProductTitle({this.hasAltName = false, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -163,11 +164,23 @@ class ProductTitle extends StatelessWidget {
         const SizedBox(
           height: 8.0,
         ),
-        Text(product.brands?.join(',') ?? ''),
+        Text(product.brands?.join(',') ?? '',
+            style: TextStyle(fontSize: 19, color: AppColors.gray2)),
         const SizedBox(
           height: 8.0,
         ),
-        Text(product.altName ?? ''),
+        Container(
+          child: this.hasAltName
+              ? Text(product.altName ?? '',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.gray3))
+              : null,
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
       ],
     );
   }
