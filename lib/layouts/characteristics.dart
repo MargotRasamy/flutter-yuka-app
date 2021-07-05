@@ -70,20 +70,28 @@ class ProductCharacteristics extends StatelessWidget {
                 ProductCharacteristicsDetails(
                     label: 'Ingrédients',
                     characteristicsLabel: <String>[
+                      'Légumes',
+                      'Eau',
                       'Sucre',
-                      'Cholesterol',
-                      'Sucre',
-                      'Cholesterol'
+                      'Garniture(2.5%)',
+                      'Sel',
+                      'Arômes naturels'
                     ],
                     characteristicsDetails: <String>[
                       '2 grammes',
                       '3%',
-                      '2 grammes',
-                      '3%'
+                      '5 grammes',
+                      '10 grammes',
+                      '1.4 grammes',
+                      'Oui'
                     ]),
                 ProductCharacteristicsDetails(
                     label: 'Substances allergènes',
-                    characteristicsLabel: null,
+                    characteristicsLabel: <String>['Allergene'],
+                    characteristicsDetails: null),
+                ProductCharacteristicsDetails(
+                    label: 'Additifs',
+                    characteristicsLabel: <String>['Additif'],
                     characteristicsDetails: null)
               ],
             ),
