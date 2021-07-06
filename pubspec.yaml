@@ -31,10 +31,19 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter_bloc: ^7.0.1
   flutter_barcode_scanner: ^2.0.0
+  json_annotation: ^4.0.1
+  retrofit: ^2.0.0
+  dio: ^4.0.0
+  built_value: ^8.1.0
+  logger: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  retrofit_generator: ^2.0.0
+  json_serializable: any
+  build_runner: any
+  built_value_generator: ^8.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
