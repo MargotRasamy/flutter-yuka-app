@@ -35,6 +35,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
   Stream<CounterState> mapEventToState(CounterEvent event) async* {
     if (event is IncrementCounterEvent) {
       _counter++;
+      //Change state
       yield IncrementedCounterState(_counter);
     }
   }

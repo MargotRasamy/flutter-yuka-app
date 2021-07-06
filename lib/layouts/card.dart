@@ -7,35 +7,32 @@ import '../res/app_icons.dart';
 import '../res/app_images.dart';
 
 class CardView extends StatelessWidget {
-  const CardView({Key? key}) : super(key: key);
+  final Product? scannedProduct;
+  const CardView({this.scannedProduct = null, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Product product = Product(
-        barcode: '12345678',
-        name: 'Petits pois et carotes',
-        brands: <String>['Cassegrain'],
-        altName: "Petits pois et carottes à l'étuvée avec garniture");
-
-    return Scaffold(
-      body: SizedBox.expand(
-        child: ProductHolder(
-          product: product,
-          child: Stack(
-            children: <Widget>[
-              ProductImage(),
-              Positioned(
-                left: 0.0,
-                right: 0.0,
-                top: 250.0,
-                bottom: 0.0,
-                child: ProductDetails(),
+    return this.scannedProduct != null
+        ? Scaffold(
+            body: SizedBox.expand(
+              child: ProductHolder(
+                product: this.scannedProduct!,
+                child: Stack(
+                  children: <Widget>[
+                    ProductImage(),
+                    Positioned(
+                      left: 0.0,
+                      right: 0.0,
+                      top: 250.0,
+                      bottom: 0.0,
+                      child: ProductDetails(),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          )
+        : Text('Pas de produits scannés');
   }
 }
 

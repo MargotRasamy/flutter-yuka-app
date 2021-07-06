@@ -6,7 +6,8 @@ import './card.dart';
 import '../product/product.dart';
 
 class NutritionView extends StatelessWidget {
-  const NutritionView({Key? key}) : super(key: key);
+  final Product? scannedProduct;
+  const NutritionView({this.scannedProduct = null, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,25 +17,27 @@ class NutritionView extends StatelessWidget {
         brands: <String>['Cassegrain'],
         altName: "Petits pois et carottes à l'étuvée avec garniture");
 
-    return Scaffold(
-      body: SizedBox.expand(
-        child: ProductHolder(
-          product: product,
-          child: Stack(
-            children: <Widget>[
-              ProductImage(),
-              Positioned(
-                left: 0.0,
-                right: 0.0,
-                top: 250.0,
-                bottom: 0.0,
-                child: ProductNutrition(),
+    return this.scannedProduct != null
+        ? Scaffold(
+            body: SizedBox.expand(
+              child: ProductHolder(
+                product: this.scannedProduct!,
+                child: Stack(
+                  children: <Widget>[
+                    ProductImage(),
+                    Positioned(
+                      left: 0.0,
+                      right: 0.0,
+                      top: 250.0,
+                      bottom: 0.0,
+                      child: ProductNutrition(),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          )
+        : Text('Pas de produits scannés');
   }
 }
 
