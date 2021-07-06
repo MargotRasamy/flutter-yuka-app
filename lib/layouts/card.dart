@@ -47,7 +47,7 @@ class ProductImage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 300.0,
-      color: AppColors.blueLight,
+      color: AppColors.gray3,
     );
   }
 }
