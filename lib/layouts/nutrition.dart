@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuka/theme/app_colors.dart';
 
-import './array_details.dart';
 import './card.dart';
 import '../product/product.dart';
 
@@ -31,33 +30,6 @@ class NutritionView extends StatelessWidget {
                 bottom: 0.0,
                 child: ProductNutrition(),
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              ArrayDetailsView()),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'COMMENCER',
-                        style: TextStyle(
-                            fontFamily: 'Avenir', fontWeight: FontWeight.w800),
-                      ),
-                      Icon(Icons.arrow_right_alt),
-                    ],
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    primary: AppColors.blue,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(22.0))),
-                    backgroundColor: AppColors.yellow,
-                    padding: EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                  ))
             ],
           ),
         ),

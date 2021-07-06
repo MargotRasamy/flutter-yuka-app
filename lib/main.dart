@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yuka/theme/app_colors.dart';
 
-import 'layouts/card.dart';
+import 'layouts/app_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => CardView()),
+                        builder: (BuildContext context) => AppView()),
                   );
                 },
                 child: Row(

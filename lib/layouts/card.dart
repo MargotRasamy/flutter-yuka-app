@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yuka/theme/app_colors.dart';
 
-import './characteristics.dart';
 import '../product/product.dart';
 import '../res/app_icons.dart';
 import '../res/app_images.dart';
@@ -32,33 +31,6 @@ class CardView extends StatelessWidget {
                 bottom: 0.0,
                 child: ProductDetails(),
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              CharacteristicsView()),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'COMMENCER',
-                        style: TextStyle(
-                            fontFamily: 'Avenir', fontWeight: FontWeight.w800),
-                      ),
-                      Icon(Icons.arrow_right_alt),
-                    ],
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    primary: AppColors.blue,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(22.0))),
-                    backgroundColor: AppColors.yellow,
-                    padding: EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                  ))
             ],
           ),
         ),
