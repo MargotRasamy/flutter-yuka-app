@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yuka/res/app_icons.dart';
 import 'package:yuka/theme/app_colors.dart';
@@ -59,8 +58,14 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                   onPressed: () async {
-                    await FlutterBarcodeScanner.scanBarcode(
-                        '#ff6666', 'Retour', true, ScanMode.DEFAULT);
+                    // await FlutterBarcodeScanner.scanBarcode(
+                    //     '#ff6666', 'Retour', true, ScanMode.DEFAULT);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              AppView(barCode: '5000159484695')),
+                    );
                   },
                   icon: const Icon(AppIcons.barcode),
                   color: AppColors.black),

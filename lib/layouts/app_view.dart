@@ -9,7 +9,10 @@ import 'package:yuka/res/app_icons.dart';
 enum ProductDetailsCurrentTab { summary, info, nutrition, nutrionalValues }
 
 class AppView extends StatefulWidget {
-  AppView({Key? key}) : super(key: key);
+  final String? barCode;
+
+  AppView({this.barCode = null, Key? key})
+      : super(key: key); //TODO to use it widget.barCode
 
   @override
   _AppViewState createState() => _AppViewState();
