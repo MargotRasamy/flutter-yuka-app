@@ -48,19 +48,25 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final ApiYukaProduct client =
           ApiYukaProduct(Dio(BaseOptions(contentType: 'application/json')));
 
-      //ici faire une requete avec le barcode et le retour de la requete ira en argument de yield ProductAvailableState ()
       final APIGetProductResponse data =
           await client.getProduct(barCodeParam: barcode);
 
+      // PS: J'ai créé un objet Product et ai rempli chaque champ avec les champs de la réponse manuellement
+      // car l'appel nous rend un APIProduct alors que le state attend un Product
+      // Pas forcément optimal mais je n'ai pas trop compris pourquoi vous nous avez donné les classes dans api_product.dart et également
+      // celles de product.dart. Il fallait n'en utiliser qu'un des 2 fichiers ? product.dart était censé être temporaire ?
+      // Je n'ai pas réussi à vous contacter pour cette question.
+
       // Requête
       yield ProductAvailableState(Product(
-          barcode: barcode,
-          name: data.response!.name,
-          altName: data.response!.altName,
-          picture: data.response!.picture,
-          brands: data.response!.brands,
-          quantity: data.response!.quantity,
-          manufacturingCountries: data.response!.manufacturingCountries));
+        barcode: barcode,
+        name: data.response!.name,
+        altName: data.response!.altName,
+        picture: data.response!.picture,
+        brands: data.response!.brands,
+        quantity: data.response!.quantity,
+        manufacturingCountries: data.response!.manufacturingCountries,
+      ));
     }
   }
 }

@@ -32,7 +32,7 @@ class ArrayDetailsView extends StatelessWidget {
               ),
             ),
           )
-        : Text('Pas de produits scannés');
+        : Scaffold(body: Center(child: Text('Pas de produits scannés')));
   }
 }
 
