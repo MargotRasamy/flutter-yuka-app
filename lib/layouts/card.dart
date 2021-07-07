@@ -41,10 +41,15 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Product? product = ProductHolder.of(context)?.product;
+
     return Container(
       width: double.infinity,
       height: 300.0,
-      color: AppColors.gray3,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(product!.picture ??
+                  'https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png'))),
     );
   }
 }

@@ -57,6 +57,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           barcode: barcode,
           name: data.response!.name,
           altName: data.response!.altName,
+          picture: data.response!.picture,
           brands: data.response!.brands,
           quantity: data.response!.quantity,
           manufacturingCountries: data.response!.manufacturingCountries));
