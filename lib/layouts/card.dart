@@ -32,7 +32,7 @@ class CardView extends StatelessWidget {
               ),
             ),
           )
-        : Text('Pas de produits scannés');
+        : Scaffold(body: Center(child: Text('Pas de produits scannés')));
   }
 }
 
@@ -275,17 +275,20 @@ class ProductFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Product? product = ProductHolder.of(context)?.product;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ProductField(
           label: 'Quantité',
-          value: '200g',
+          value: product!.quantity ?? 'Non spécifié',
           divider: true,
         ),
         ProductField(
           label: 'Vendu',
-          value: 'France',
+          value: product.manufacturingCountries is List<String>
+              ? product.manufacturingCountries![0]
+              : 'Non spécifié',
           divider: false,
         ),
       ],

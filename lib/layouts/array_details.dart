@@ -207,7 +207,7 @@ class TableNutritionDetails extends StatelessWidget {
                           ])
                 ]),
           ])
-        : Text('Aucun détails');
+        : Scaffold(body: Center(child: Text('Aucun détails')));
   }
 }
 

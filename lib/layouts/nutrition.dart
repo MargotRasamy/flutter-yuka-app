@@ -11,12 +11,6 @@ class NutritionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Product product = Product(
-        barcode: '12345678',
-        name: 'Petits pois et carotes',
-        brands: <String>['Cassegrain'],
-        altName: "Petits pois et carottes à l'étuvée avec garniture");
-
     return this.scannedProduct != null
         ? Scaffold(
             body: SizedBox.expand(
@@ -37,7 +31,7 @@ class NutritionView extends StatelessWidget {
               ),
             ),
           )
-        : Text('Pas de produits scannés');
+        : Scaffold(body: Center(child: Text('Pas de produits scannés')));
   }
 }
 

@@ -64,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: IconButton(
                     onPressed: () async {
                       BlocProvider.of<ProductBloc>(context)
-                          .fetchProduct('7949693950');
+                          .fetchProduct('5000159484695');
                       // await FlutterBarcodeScanner.scanBarcode(
                       //     '#ff6666', 'Retour', true, ScanMode.DEFAULT);
                     },
@@ -166,7 +166,7 @@ class _NewPageState extends State<NewPage> {
         ApiYukaProduct(Dio(BaseOptions(contentType: 'application/json')));
 
     return FutureBuilder<APIGetProductResponse>(
-      future: client.getProduct(),
+      future: client.getProduct(barCodeParam: '5000159484695'),
       builder: (BuildContext context,
           AsyncSnapshot<APIGetProductResponse> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -187,7 +187,7 @@ class _NewPageState extends State<NewPage> {
       width: double.infinity,
       height: 500,
       child: Text(
-        productElement.response?.altName ?? 'ge',
+        productElement.response?.name ?? 'ge',
         style: TextStyle(fontSize: 20),
       ),
     );

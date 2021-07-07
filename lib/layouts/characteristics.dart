@@ -31,7 +31,7 @@ class CharacteristicsView extends StatelessWidget {
               ),
             ),
           )
-        : Text('Pas de produits scannés');
+        : Scaffold(body: Center(child: Text('Pas de produits scannés')));
   }
 }
 
@@ -40,6 +40,8 @@ class ProductCharacteristics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Product? product = ProductHolder.of(context)?.product;
+
     const BorderRadius borderRadius = BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),

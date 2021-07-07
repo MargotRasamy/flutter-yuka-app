@@ -10,5 +10,5 @@ abstract class ApiYukaProduct {
 
   @GET('/getProduct')
   Future<APIGetProductResponse> getProduct(
-      {@Query('barcode') String barCodeParam = '5000159484695'});
+      {@Query('barcode') String barCodeParam});
 }
