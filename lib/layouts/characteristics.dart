@@ -67,32 +67,25 @@ class ProductCharacteristics extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                ProductCharacteristicsDetails(
-                    label: 'Ingrédients',
-                    characteristicsLabel: <String>[
-                      'Légumes',
-                      'Eau',
-                      'Sucre',
-                      'Garniture(2.5%)',
-                      'Sel',
-                      'Arômes naturels'
-                    ],
-                    characteristicsDetails: <String>[
-                      '2 grammes',
-                      '3%',
-                      '5 grammes',
-                      '10 grammes',
-                      '1.4 grammes',
-                      'Oui'
-                    ]),
-                ProductCharacteristicsDetails(
-                    label: 'Substances allergènes',
-                    characteristicsLabel: <String>['Allergene'],
-                    characteristicsDetails: null),
-                ProductCharacteristicsDetails(
-                    label: 'Additifs',
-                    characteristicsLabel: <String>['Additif'],
-                    characteristicsDetails: null)
+                product != null
+                    ? ProductCharacteristicsDetails(
+                        label: 'Ingrédients',
+                        characteristicsLabel: product.ingredients!.ingredients,
+                        characteristicsDetails: null)
+                    : Text('Pas de détails sur le produit'),
+                product != null
+                    ? ProductCharacteristicsDetails(
+                        label: 'Substances allergènes',
+                        characteristicsLabel: product.allergens!.list,
+                        characteristicsDetails: null)
+                    : Text('Pas de détails sur le produit'),
+                product != null
+                    ? ProductCharacteristicsDetails(
+                        label: 'Additifs',
+                        characteristicsLabel:
+                            product.additives!.list.values.toList(),
+                        characteristicsDetails: null)
+                    : Text('Pas de détails sur le produit')
               ],
             ),
           ),
@@ -132,12 +125,12 @@ class ProductCharacteristicsDetails extends StatelessWidget {
                 ),
               ),
             )),
-        this.characteristicsDetails is List<String>
+        this.characteristicsLabel != null
             ? Column(children: <Widget>[
-                for (int i = 0; i < this.characteristicsDetails!.length; i++)
+                for (int i = 0; i < this.characteristicsLabel!.length; i++)
                   ProductField(
                       label: this.characteristicsLabel![i],
-                      value: this.characteristicsDetails![i],
+                      value: this.characteristicsDetails?[i] ?? '',
                       divider: true,
                       boldLabel: true)
               ])

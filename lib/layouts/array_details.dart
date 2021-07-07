@@ -181,11 +181,14 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.energy?.per100g ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.energy?.per100g != null
+                            ? '${this.foodNutritionDetails!.energy?.per100g} ${this.foodNutritionDetails!.energy?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.energy?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.energy?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.energy?.perServing} ${this.foodNutritionDetails!.energy?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -193,10 +196,13 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.fat?.per100g ?? 'N.C'),
+                        text: this.foodNutritionDetails!.fat?.per100g != null
+                            ? '${this.foodNutritionDetails!.fat?.per100g} ${this.foodNutritionDetails!.fat?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.fat?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.fat?.perServing != null
+                            ? '${this.foodNutritionDetails!.fat?.perServing} ${this.foodNutritionDetails!.fat?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -204,15 +210,21 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text:
-                            this.foodNutritionDetails!.saturatedFat?.per100g ??
-                                'N.C'),
+                        text: this
+                                    .foodNutritionDetails!
+                                    .saturatedFat
+                                    ?.per100g !=
+                                null
+                            ? '${this.foodNutritionDetails!.saturatedFat?.per100g} ${this.foodNutritionDetails!.saturatedFat?.unit}'
+                            : 'N.C'),
                     TableCellElement(
                         text: this
-                                .foodNutritionDetails!
-                                .saturatedFat
-                                ?.perServing ??
-                            'N.C'),
+                                    .foodNutritionDetails!
+                                    .saturatedFat
+                                    ?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.saturatedFat?.perServing} ${this.foodNutritionDetails!.saturatedFat?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -220,15 +232,21 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text:
-                            this.foodNutritionDetails!.carbohydrate?.per100g ??
-                                'N.C'),
+                        text: this
+                                    .foodNutritionDetails!
+                                    .carbohydrate
+                                    ?.per100g !=
+                                null
+                            ? '${this.foodNutritionDetails!.carbohydrate?.per100g} ${this.foodNutritionDetails!.carbohydrate?.unit}'
+                            : 'N.C'),
                     TableCellElement(
                         text: this
-                                .foodNutritionDetails!
-                                .carbohydrate
-                                ?.perServing ??
-                            'N.C'),
+                                    .foodNutritionDetails!
+                                    .carbohydrate
+                                    ?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.carbohydrate?.perServing} ${this.foodNutritionDetails!.carbohydrate?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -236,11 +254,14 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text:
-                            this.foodNutritionDetails!.sugar?.per100g ?? 'N.C'),
+                        text: this.foodNutritionDetails!.sugar?.per100g != null
+                            ? '${this.foodNutritionDetails!.sugar?.per100g} ${this.foodNutritionDetails!.sugar?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.sugar?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.sugar?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.sugar?.perServing} ${this.foodNutritionDetails!.sugar?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -248,11 +269,14 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text:
-                            this.foodNutritionDetails!.fiber?.per100g ?? 'N.C'),
+                        text: this.foodNutritionDetails!.fiber?.per100g != null
+                            ? '${this.foodNutritionDetails!.fiber?.per100g} ${this.foodNutritionDetails!.fiber?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.fiber?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.fiber?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.fiber?.perServing} ${this.foodNutritionDetails!.fiber?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -260,11 +284,15 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.proteins?.per100g ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.proteins?.per100g !=
+                                null
+                            ? '${this.foodNutritionDetails!.proteins?.per100g} ${this.foodNutritionDetails!.proteins?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.proteins?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.proteins?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.proteins?.perServing} ${this.foodNutritionDetails!.proteins?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -272,11 +300,14 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text:
-                            this.foodNutritionDetails!.salt?.per100g ?? 'N.C'),
+                        text: this.foodNutritionDetails!.salt?.per100g != null
+                            ? '${this.foodNutritionDetails!.salt?.per100g} ${this.foodNutritionDetails!.salt?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.salt?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.salt?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.salt?.perServing} ${this.foodNutritionDetails!.salt?.unit}'
+                            : 'N.C'),
                   ]),
                   TableRow(children: <TableCellElement>[
                     TableCellElement(
@@ -284,11 +315,14 @@ class TableNutritionDetails extends StatelessWidget {
                         bold: true,
                         justifiedLeft: true),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.sodium?.per100g ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.sodium?.per100g != null
+                            ? '${this.foodNutritionDetails!.sodium?.per100g} ${this.foodNutritionDetails!.sodium?.unit}'
+                            : 'N.C'),
                     TableCellElement(
-                        text: this.foodNutritionDetails!.sodium?.perServing ??
-                            'N.C'),
+                        text: this.foodNutritionDetails!.sodium?.perServing !=
+                                null
+                            ? '${this.foodNutritionDetails!.sodium?.perServing} ${this.foodNutritionDetails!.sodium?.unit}'
+                            : 'N.C'),
                   ])
 
                   // for (NutritionTypes value in NutritionTypes.values)
