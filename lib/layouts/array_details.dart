@@ -41,6 +41,8 @@ class ProductArrayDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    APIProduct? product = ProductHolder.of(context)?.product;
+
     const BorderRadius borderRadius = BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
@@ -53,43 +55,26 @@ class ProductArrayDetails extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         child: ClipRRect(
-          borderRadius: borderRadius,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15.0,
-              vertical: 20.0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProductTitle(),
-                const SizedBox(
-                  height: 10.0,
+            borderRadius: borderRadius,
+            child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.0,
+                  vertical: 20.0,
                 ),
-                TableNutritionDetails(
-                  foodNutritionDetails: {
-                    'carbohydrate': {
-                      'unit': 'g',
-                      'perServing': '15.7',
-                      'per100g': '36.4'
-                    },
-                    'sugar': {
-                      'unit': 'g',
-                      'perServing': '12.6',
-                      'per100g': '29.2'
-                    },
-                    'fiber': null,
-                    'proteins': {
-                      'unit': 'g',
-                      'perServing': '1.21',
-                      'per100g': '2.8'
-                    },
-                  },
-                )
-              ],
-            ),
-          ),
-        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProductTitle(),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    product != null
+                        ? TableNutritionDetails(
+                            foodNutritionDetails: product.nutritionFacts,
+                          )
+                        : Text('Pas de détails sur ce produit')
+                  ],
+                ))),
       ),
     );
   }
@@ -128,28 +113,51 @@ class TableCellElement extends StatelessWidget {
   }
 }
 
-class TableNutritionDetails extends StatelessWidget {
-  final Map<String, Map<String, String>?>?
-      foodNutritionDetails; //TODO check type conformity
+enum NutritionTypes {
+  energy,
+  fat,
+  saturatedFat,
+  carbohydrate,
+  sugar,
+  fiber,
+  proteins,
+  salt,
+  sodium
+}
 
-  static const List<Map<String, String>> nutritionTypeList =
-      <Map<String, String>>[
-    {'label': 'energy', 'name': 'Energie'},
-    {'label': 'fat', 'name': 'Matières grasses'},
-    {'label': 'saturatedFat', 'name': 'dont Acides gras saturés'},
-    {'label': 'carbohydrate', 'name': 'Glucides'},
-    {'label': 'sugar', 'name': 'dont Sucres'},
-    {'label': 'fiber', 'name': 'Fibres alimentaires'},
-    {'label': 'proteins', 'name': 'Protéines'},
-    {'label': 'salt', 'name': 'Sel'},
-    {'label': 'sodium', 'name': 'Sodium'}
-  ];
+class TableNutritionDetails extends StatelessWidget {
+  final APINutritionFacts? foodNutritionDetails; //TODO check type conformity
+
+  String nutritionTypeLabel(NutritionTypes? nutritionType) {
+    switch (nutritionType) {
+      case NutritionTypes.energy:
+        return 'Energie';
+      case NutritionTypes.fat:
+        return 'Matières grasses';
+      case NutritionTypes.saturatedFat:
+        return 'dont Acides gras saturés';
+      case NutritionTypes.carbohydrate:
+        return 'Glucides';
+      case NutritionTypes.sugar:
+        return 'dont Sucres';
+      case NutritionTypes.fiber:
+        return 'Fibres alimentaires';
+      case NutritionTypes.proteins:
+        return 'Protéines';
+      case NutritionTypes.salt:
+        return 'Sel';
+      case NutritionTypes.sodium:
+        return 'Sodium';
+      default:
+        return '';
+    }
+  }
 
   TableNutritionDetails({required this.foodNutritionDetails});
 
   @override
   Widget build(BuildContext context) {
-    return this.foodNutritionDetails != null // TODO change is NutritionFacts
+    return this.foodNutritionDetails != null
         ? Column(children: [
             Table(
                 border: TableBorder.all(color: AppColors.gray2),
@@ -162,85 +170,140 @@ class TableNutritionDetails extends StatelessWidget {
                     TableCellElement(text: 'Pour 100g', bold: true),
                     TableCellElement(text: 'Par part', bold: true),
                   ]),
-                  for (int i = 0; i < nutritionTypeList.length; i++)
-                    this.foodNutritionDetails!.containsKey(
-                            nutritionTypeList[i] //TODO check if working well
-                                ['label']) //TODO check if working
-                        ? TableRow(children: <TableCellElement>[
-                            TableCellElement(
-                                text: nutritionTypeList[i]['name']!,
-                                bold: true,
-                                justifiedLeft: true),
-                            TableCellElement(
-                                text: this.foodNutritionDetails?[
-                                                nutritionTypeList[i]['label']]
-                                            ?['per100g'] !=
-                                        null
-                                    ? "${this.foodNutritionDetails![nutritionTypeList[i]['label']]!['per100g']} ${this.foodNutritionDetails?[nutritionTypeList[i]['label']]?['unit'] ?? 'g'}"
-                                    : 'N.C'),
-                            TableCellElement(
-                                text: this.foodNutritionDetails?[
-                                                nutritionTypeList[i]['label']]
-                                            ?['perServing'] !=
-                                        null
-                                    ? "${this.foodNutritionDetails![nutritionTypeList[i]['label']]!['per100g']} ${this.foodNutritionDetails?[nutritionTypeList[i]['label']]?['unit'] ?? 'g'}"
-                                    : 'N.C'),
-                          ])
-                        : TableRow(children: <TableCellElement>[
-                            TableCellElement(
-                                text: nutritionTypeList[i]['name']!,
-                                bold: true,
-                                justifiedLeft: true),
-                            TableCellElement(text: 'N.C'),
-                            TableCellElement(text: 'N.C'),
-                          ])
+
+                  // A partir de là
+                  //J'ai tenté de faire une boucle mais le problème c'est que
+                  //je ne peux itérer sur la classe
+
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.energy),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.energy?.per100g ??
+                            'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.energy?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.fat),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.fat?.per100g ?? 'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.fat?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.saturatedFat),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text:
+                            this.foodNutritionDetails!.saturatedFat?.per100g ??
+                                'N.C'),
+                    TableCellElement(
+                        text: this
+                                .foodNutritionDetails!
+                                .saturatedFat
+                                ?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.carbohydrate),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text:
+                            this.foodNutritionDetails!.carbohydrate?.per100g ??
+                                'N.C'),
+                    TableCellElement(
+                        text: this
+                                .foodNutritionDetails!
+                                .carbohydrate
+                                ?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.sugar),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text:
+                            this.foodNutritionDetails!.sugar?.per100g ?? 'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.sugar?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.fiber),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text:
+                            this.foodNutritionDetails!.fiber?.per100g ?? 'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.fiber?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.proteins),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.proteins?.per100g ??
+                            'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.proteins?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.salt),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text:
+                            this.foodNutritionDetails!.salt?.per100g ?? 'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.salt?.perServing ??
+                            'N.C'),
+                  ]),
+                  TableRow(children: <TableCellElement>[
+                    TableCellElement(
+                        text: nutritionTypeLabel(NutritionTypes.sodium),
+                        bold: true,
+                        justifiedLeft: true),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.sodium?.per100g ??
+                            'N.C'),
+                    TableCellElement(
+                        text: this.foodNutritionDetails!.sodium?.perServing ??
+                            'N.C'),
+                  ])
+
+                  // for (NutritionTypes value in NutritionTypes.values)
+                  //   TableRow(children: <TableCellElement>[
+                  //     TableCellElement(
+                  //         text: nutritionTypeLabel(value),
+                  //         bold: true,
+                  //         justifiedLeft: true),
+                  //     TableCellElement(
+                  //         text: this.foodNutritionDetails![nutritionTypeName(value)]?.per100g ?? ''),
+                  //     TableCellElement(
+                  //         text: this.foodNutritionDetails![nutritionTypeName(value)]?.perServing ?? ''),
+                  //   ])
                 ]),
           ])
         : Scaffold(body: Center(child: Text('Aucun détails')));
   }
 }
-
-// "nutritionFacts":{
-// "servingSize":"43.1ml",
-// "calories":null,
-// "fat":{
-// "unit":"g",
-// "perServing":"6.12",
-// "per100g":"14.2"
-// },
-// "saturatedFat":{ gras saturés
-// "unit":"g",
-// "perServing":"4.14",
-// "per100g":"9.6"
-// },
-// "carbohydrate":{ glucide
-// "unit":"g",
-// "perServing":"15.7",
-// "per100g":"36.4"
-// },
-// "sugar":{ sucre
-// "unit":"g",
-// "perServing":"12.6",
-// "per100g":"29.2"
-// },
-// "fiber":null,
-// "proteins":{
-// "unit":"g",
-// "perServing":"1.21",
-// "per100g":"2.8"
-// },
-// "sodium":{
-// "unit":"g",
-// "perServing":"0.0465",
-// "per100g":"0.108"
-// },
-// "salt":{
-// "unit":"g",
-// "perServing":"0.116",
-// "per100g":"0.27"
-// },
-// "energy":{
-// "unit":"kJ",
-// "perServing":"517",
-// "per100g":"1199"
-// }
