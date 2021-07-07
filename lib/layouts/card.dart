@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yuka/repository/model/api_product.dart';
+import 'package:yuka/res/resources.dart';
 import 'package:yuka/theme/app_colors.dart';
 
 import '../res/app_icons.dart';
@@ -213,14 +214,35 @@ class ProductInfoLine1 extends StatelessWidget {
 class ProductInfoNutriScore extends StatelessWidget {
   const ProductInfoNutriScore({Key? key}) : super(key: key);
 
+  String returnNutriscoreImage(APIProductNutriscore? nutriscore) {
+    switch (nutriscore) {
+      case APIProductNutriscore.A:
+        return AppImages.nutriscoreA;
+      case APIProductNutriscore.B:
+        return AppImages.nutriscoreB;
+      case APIProductNutriscore.C:
+        return AppImages.nutriscoreC;
+      case APIProductNutriscore.D:
+        return AppImages.nutriscoreD;
+      case APIProductNutriscore.E:
+        return AppImages.nutriscoreE;
+      default:
+        return AppImages.nutriscoreA;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    APIProduct? product = ProductHolder.of(context)?.product;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Nutri-Score'),
-        Image.asset(AppImages.nutriscoreA),
+        Text('Nutri-Score',
+            style:
+                TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold)),
+        Image.asset(returnNutriscoreImage(product?.nutriScore)),
       ],
     );
   }
@@ -229,14 +251,32 @@ class ProductInfoNutriScore extends StatelessWidget {
 class ProductInfoNova extends StatelessWidget {
   const ProductInfoNova({Key? key}) : super(key: key);
 
+  String returnNovascoreLabel(APIProductNovaScore? novascore) {
+    switch (novascore) {
+      case APIProductNovaScore.Group1:
+        return 'Aliments non transformés ou transformés minimalement';
+      case APIProductNovaScore.Group2:
+        return 'Ingrédients culinaires transformés';
+      case APIProductNovaScore.Group3:
+        return 'Aliments transformés';
+      case APIProductNovaScore.Group4:
+        return 'Produits alimentaires et boissons ultra-transformés';
+      default:
+        return 'Pas de score nova';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    APIProduct? product = ProductHolder.of(context)?.product;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Groupe Nova'),
-        Text('Lorem ipsum'),
+        Text('Groupe Nova',
+            style:
+                TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold)),
+        Text(returnNovascoreLabel(product?.novaScore)),
       ],
     );
   }
@@ -245,8 +285,26 @@ class ProductInfoNova extends StatelessWidget {
 class ProductInfoLine2 extends StatelessWidget {
   const ProductInfoLine2({Key? key}) : super(key: key);
 
+  IconData returnEcoscoreImage(APIProductEcoScore? ecoscore) {
+    switch (ecoscore) {
+      case APIProductEcoScore.A:
+        return AppIcons.ecoscoreA;
+      case APIProductEcoScore.B:
+        return AppIcons.ecoscoreB;
+      case APIProductEcoScore.C:
+        return AppIcons.ecoscoreC;
+      case APIProductEcoScore.D:
+        return AppIcons.ecoscoreD;
+      case APIProductEcoScore.E:
+        return AppIcons.ecoscoreE;
+      default:
+        return AppIcons.ecoscoreA;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    APIProduct? product = ProductHolder.of(context)?.product;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 20.0,
@@ -256,10 +314,12 @@ class ProductInfoLine2 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('EcoScore'),
+          Text('EcoScore',
+              style: TextStyle(
+                  color: AppColors.blue, fontWeight: FontWeight.bold)),
           Row(
             children: [
-              Icon(AppIcons.ecoscoreA),
+              Icon(returnEcoscoreImage(product?.ecoScore)),
               const SizedBox(
                 width: 10.0,
               ),
@@ -287,6 +347,7 @@ class ProductFields extends StatelessWidget {
           label: 'Quantité',
           value: product!.quantity ?? 'Non spécifié',
           divider: true,
+          boldLabel: true,
         ),
         ProductField(
           label: 'Vendu',
@@ -294,6 +355,7 @@ class ProductFields extends StatelessWidget {
               ? product.manufacturingCountries![0]
               : 'Non spécifié',
           divider: false,
+          boldLabel: true,
         ),
       ],
     );
