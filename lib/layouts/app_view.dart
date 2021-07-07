@@ -10,24 +10,16 @@ import 'package:yuka/res/app_icons.dart';
 enum ProductDetailsCurrentTab { summary, info, nutrition, nutrionalValues }
 
 class AppView extends StatefulWidget {
-  final String? barCode;
   final APIProduct? scannedProduct;
 
-  AppView({this.barCode = null, this.scannedProduct = null, Key? key})
-      : super(key: key); //TODO to use it widget.barCode
+  AppView({this.scannedProduct = null, Key? key}) : super(key: key);
 
   @override
   _AppViewState createState() => _AppViewState();
 }
 
 class _AppViewState extends State<AppView> {
-  // Product? myProduct;
   int _counter = 0;
-
-  // @override
-  // void initState() {
-  //   myProduct = widget.scannedProduct;
-  // }
 
   final List<StatelessWidget> tabs = [
     CardView(),

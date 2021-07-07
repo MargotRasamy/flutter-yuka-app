@@ -50,22 +50,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final APIGetProductResponse data =
           await client.getProduct(barCodeParam: barcode);
 
-      // PS: J'ai créé un objet Product et ai rempli chaque champ avec les champs de la réponse manuellement
-      // car l'appel nous rend un APIProduct alors que le state attend un Product
-      // Pas forcément optimal mais je n'ai pas trop compris pourquoi vous nous avez donné les classes dans api_product.dart et également
-      // celles de product.dart. Il fallait n'en utiliser qu'un des 2 fichiers ? product.dart était censé être temporaire ?
-      // Je n'ai pas réussi à vous contacter pour cette question.
-
       // Requête
       yield ProductAvailableState(data.response!);
     }
   }
 }
 
-class MyTest extends StatelessWidget {
-  final String? barCode;
-
-  const MyTest({this.barCode = null, Key? key}) : super(key: key);
+class EnterApp extends StatelessWidget {
+  const EnterApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +69,6 @@ class MyTest extends StatelessWidget {
             ? Scaffold(
                 body: Center(
                 child: AppView(
-                  barCode: this.barCode,
                   scannedProduct: state.product,
                 ),
               ))
@@ -90,11 +81,20 @@ class MyTest extends StatelessWidget {
                     Text(
                       'Patientez quelques secondes...',
                       style: TextStyle(fontSize: 18),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(
                       height: 50.0,
                     ),
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(),
+                    const SizedBox(
+                      height: 100.0,
+                    ),
+                    Text(
+                      "PS : Si le chargement ne s'arrête pas, c'est que vous n'avez pas testé le QR code avec votre téléphone. Retournez sur la page d'accueil.",
+                      style: TextStyle(fontSize: 15),
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 )),
               );
