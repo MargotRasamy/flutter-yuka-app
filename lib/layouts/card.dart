@@ -345,15 +345,13 @@ class ProductFields extends StatelessWidget {
       children: [
         ProductField(
           label: 'Quantité',
-          value: product!.quantity ?? 'Non spécifié',
+          value: product?.quantity ?? 'Non spécifiée',
           divider: true,
           boldLabel: true,
         ),
         ProductField(
           label: 'Vendu',
-          value: product.manufacturingCountries is List<String>
-              ? product.manufacturingCountries![0]
-              : 'Non spécifié',
+          value: product!.manufacturingCountries?.join(',') ?? '',
           divider: false,
           boldLabel: true,
         ),

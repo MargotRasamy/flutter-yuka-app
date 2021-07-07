@@ -62,6 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () async {
                       BlocProvider.of<ProductBloc>(context)
                           .fetchProduct('5000159484695');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext _) => BlocProvider.value(
+                                value: BlocProvider.of<ProductBloc>(context),
+                                child: MyTest(barCode: '5000159484695'))),
+                      );
                       // await FlutterBarcodeScanner.scanBarcode(
                       //     '#ff6666', 'Retour', true, ScanMode.DEFAULT);
                     },
@@ -93,6 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       TextButton(
                           onPressed: () {
+                            BlocProvider.of<ProductBloc>(context)
+                                .fetchProduct('5000159484695');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -100,8 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       BlocProvider.value(
                                           value: BlocProvider.of<ProductBloc>(
                                               context),
-                                          child:
-                                              MyTest(barCode: '7949693950'))),
+                                          child: MyTest(
+                                              barCode: '5000159484695'))),
                             );
                           },
                           child: Row(

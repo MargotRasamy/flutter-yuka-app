@@ -40,6 +40,8 @@ class ProductNutrition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    APIProduct? product = ProductHolder.of(context)?.product;
+
     const BorderRadius borderRadius = BorderRadius.only(
       topLeft: Radius.circular(16.0),
       topRight: Radius.circular(16.0),
@@ -79,11 +81,19 @@ class ProductNutrition extends StatelessWidget {
                 const SizedBox(
                   height: 10.0,
                 ),
-                ProductNutritionField(nutritionType: 'fat', quantity: 2.4),
-                ProductNutritionField(nutritionType: 'sugar', quantity: 15),
                 ProductNutritionField(
-                    nutritionType: 'saturatedFat', quantity: 4.4),
-                ProductNutritionField(nutritionType: 'salt', quantity: 15)
+                    nutritionType: 'fat',
+                    quantity: product?.nutrientLevels?.fat?.per100g ?? 0),
+                ProductNutritionField(
+                    nutritionType: 'sugar',
+                    quantity: product?.nutrientLevels?.sugars?.per100g ?? 0),
+                ProductNutritionField(
+                    nutritionType: 'saturatedFat',
+                    quantity:
+                        product?.nutrientLevels?.saturatedFat?.per100g ?? 0),
+                ProductNutritionField(
+                    nutritionType: 'salt',
+                    quantity: product?.nutrientLevels?.salt?.per100g ?? 0)
               ],
             ),
           ),
@@ -97,10 +107,10 @@ enum ProductQuantityLevel { low, moderate, high }
 
 class ProductNutritionField extends StatelessWidget {
   final String nutritionType;
-  final double quantity;
+  final num quantity;
   final bool divider;
 
-  ProductQuantityLevel checkIndicator(double quantityValue) {
+  ProductQuantityLevel checkIndicator(num quantityValue) {
     switch (this.nutritionType) {
       case 'fat':
         if (quantityValue <= 3) {
