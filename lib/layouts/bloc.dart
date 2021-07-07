@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yuka/layouts/app_view.dart';
-import 'package:yuka/product/product.dart';
 import 'package:yuka/repository/model/api_product.dart';
 import 'package:yuka/repository/retrofit/api_yuka_product.dart';
 
@@ -18,7 +17,7 @@ class FetchProductEvent extends ProductEvent {
 
 // En sortie
 abstract class ProductState {
-  final Product? product;
+  final APIProduct? product;
 
   ProductState(this.product);
 }
@@ -30,7 +29,7 @@ class InitialState extends ProductState {
 
 //new Event
 class ProductAvailableState extends ProductState {
-  ProductAvailableState(Product product) : super(product);
+  ProductAvailableState(APIProduct product) : super(product);
 }
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
@@ -58,15 +57,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       // Je n'ai pas réussi à vous contacter pour cette question.
 
       // Requête
-      yield ProductAvailableState(Product(
-        barcode: barcode,
-        name: data.response!.name,
-        altName: data.response!.altName,
-        picture: data.response!.picture,
-        brands: data.response!.brands,
-        quantity: data.response!.quantity,
-        manufacturingCountries: data.response!.manufacturingCountries,
-      ));
+      yield ProductAvailableState(data.response!);
     }
   }
 }
@@ -82,7 +73,7 @@ class MyTest extends StatelessWidget {
     return BlocBuilder<ProductBloc, ProductState>(
       bloc: _productBloc,
       builder: (BuildContext context, ProductState state) {
-        return state.product is Product
+        return state.product is APIProduct
             ? Scaffold(
                 body: Center(
                 child: AppView(

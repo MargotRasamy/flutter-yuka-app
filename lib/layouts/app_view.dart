@@ -4,14 +4,14 @@ import 'package:yuka/layouts/array_details.dart';
 import 'package:yuka/layouts/card.dart';
 import 'package:yuka/layouts/characteristics.dart';
 import 'package:yuka/layouts/nutrition.dart';
-import 'package:yuka/product/product.dart';
+import 'package:yuka/repository/model/api_product.dart';
 import 'package:yuka/res/app_icons.dart';
 
 enum ProductDetailsCurrentTab { summary, info, nutrition, nutrionalValues }
 
 class AppView extends StatefulWidget {
   final String? barCode;
-  final Product? scannedProduct;
+  final APIProduct? scannedProduct;
 
   AppView({this.barCode = null, this.scannedProduct = null, Key? key})
       : super(key: key); //TODO to use it widget.barCode
@@ -36,7 +36,7 @@ class _AppViewState extends State<AppView> {
     ArrayDetailsView()
   ];
 
-  List<StatelessWidget> returnView(Product? product) {
+  List<StatelessWidget> returnView(APIProduct? product) {
     return [
       CardView(scannedProduct: product),
       CharacteristicsView(scannedProduct: product),

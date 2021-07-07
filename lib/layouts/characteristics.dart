@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yuka/repository/model/api_product.dart';
 import 'package:yuka/theme/app_colors.dart';
 
 import './card.dart';
-import '../product/product.dart';
 
 class CharacteristicsView extends StatelessWidget {
-  final Product? scannedProduct;
+  final APIProduct? scannedProduct;
   const CharacteristicsView({this.scannedProduct = null, Key? key})
       : super(key: key);
 
@@ -40,7 +40,7 @@ class ProductCharacteristics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Product? product = ProductHolder.of(context)?.product;
+    APIProduct? product = ProductHolder.of(context)?.product;
 
     const BorderRadius borderRadius = BorderRadius.only(
       topLeft: Radius.circular(16.0),

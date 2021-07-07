@@ -1,9 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yuka/repository/model/api_product.dart';
-import 'package:yuka/repository/retrofit/api_yuka_product.dart';
 import 'package:yuka/res/app_icons.dart';
 import 'package:yuka/theme/app_colors.dart';
 
@@ -134,62 +131,62 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class NewPage extends StatefulWidget {
-  NewPage({required this.title, Key? key}) : super(key: key);
-
-  final String title;
-
-  @override
-  _NewPageState createState() => _NewPageState();
-}
-
-class _NewPageState extends State<NewPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Flutter - Retrofit Implementation'),
-      ),
-      body: _buildBody(context),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Icon(Icons.cancel),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
-
-  // build list view & manage states
-  FutureBuilder<APIGetProductResponse> _buildBody(BuildContext context) {
-    final ApiYukaProduct client =
-        ApiYukaProduct(Dio(BaseOptions(contentType: 'application/json')));
-
-    return FutureBuilder<APIGetProductResponse>(
-      future: client.getProduct(barCodeParam: '5000159484695'),
-      builder: (BuildContext context,
-          AsyncSnapshot<APIGetProductResponse> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return _buildListView(context, snapshot.data!);
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-  }
-
-  // build list view & its tile
-  Widget _buildListView(
-      BuildContext context, APIGetProductResponse productElement) {
-    return Container(
-      width: double.infinity,
-      height: 500,
-      child: Text(
-        productElement.response?.name ?? 'ge',
-        style: TextStyle(fontSize: 20),
-      ),
-    );
-  }
-}
+// class NewPage extends StatefulWidget {
+//   NewPage({required this.title, Key? key}) : super(key: key);
+//
+//   final String title;
+//
+//   @override
+//   _NewPageState createState() => _NewPageState();
+// }
+//
+// class _NewPageState extends State<NewPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       appBar: AppBar(
+//         title: Text('Flutter - Retrofit Implementation'),
+//       ),
+//       body: _buildBody(context),
+//       floatingActionButton: FloatingActionButton.extended(
+//         onPressed: () {},
+//         label: Icon(Icons.cancel),
+//         backgroundColor: Colors.green,
+//       ),
+//     );
+//   }
+//
+//   // build list view & manage states
+//   FutureBuilder<APIGetProductResponse> _buildBody(BuildContext context) {
+//     final ApiYukaProduct client =
+//         ApiYukaProduct(Dio(BaseOptions(contentType: 'application/json')));
+//
+//     return FutureBuilder<APIGetProductResponse>(
+//       future: client.getProduct(barCodeParam: '5000159484695'),
+//       builder: (BuildContext context,
+//           AsyncSnapshot<APIGetProductResponse> snapshot) {
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           return _buildListView(context, snapshot.data!);
+//         } else {
+//           return Center(
+//             child: CircularProgressIndicator(),
+//           );
+//         }
+//       },
+//     );
+//   }
+//
+//   // build list view & its tile
+//   Widget _buildListView(
+//       BuildContext context, APIGetProductResponse productElement) {
+//     return Container(
+//       width: double.infinity,
+//       height: 500,
+//       child: Text(
+//         productElement.response?.name ?? 'ge',
+//         style: TextStyle(fontSize: 20),
+//       ),
+//     );
+//   }
+// }

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yuka/repository/model/api_product.dart';
 import 'package:yuka/theme/app_colors.dart';
 
 import './card.dart';
-import '../product/product.dart';
 
 class ArrayDetailsView extends StatelessWidget {
-  final Product? scannedProduct;
+  final APIProduct? scannedProduct;
   const ArrayDetailsView({this.scannedProduct = null, Key? key})
       : super(key: key);
 
@@ -127,17 +127,6 @@ class TableCellElement extends StatelessWidget {
         ));
   }
 }
-
-// calories;
-// fat;
-// saturatedFat;
-// carbohydrate;
-// sugar;
-// fiber;
-// proteins;
-// sodium;
-// salt;
-// energy;
 
 class TableNutritionDetails extends StatelessWidget {
   final Map<String, Map<String, String>?>?

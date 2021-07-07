@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yuka/repository/model/api_product.dart';
 import 'package:yuka/theme/app_colors.dart';
 
 import './card.dart';
-import '../product/product.dart';
 
 class NutritionView extends StatelessWidget {
-  final Product? scannedProduct;
+  final APIProduct? scannedProduct;
   const NutritionView({this.scannedProduct = null, Key? key}) : super(key: key);
 
   @override

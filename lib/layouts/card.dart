@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yuka/repository/model/api_product.dart';
 import 'package:yuka/theme/app_colors.dart';
 
-import '../product/product.dart';
 import '../res/app_icons.dart';
 import '../res/app_images.dart';
 
 class CardView extends StatelessWidget {
-  final Product? scannedProduct;
+  final APIProduct? scannedProduct;
   const CardView({this.scannedProduct = null, Key? key}) : super(key: key);
 
   @override
@@ -41,7 +40,7 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Product? product = ProductHolder.of(context)?.product;
+    APIProduct? product = ProductHolder.of(context)?.product;
 
     return Container(
       width: double.infinity,
@@ -99,7 +98,7 @@ class ProductDetails extends StatelessWidget {
 }
 
 class ProductHolder extends InheritedWidget {
-  final Product product;
+  final APIProduct product;
 
   const ProductHolder({
     required this.product,
@@ -121,7 +120,7 @@ class ProductTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Product? product = ProductHolder.of(context)?.product;
+    APIProduct? product = ProductHolder.of(context)?.product;
 
     if (product == null) {
       return SizedBox();
@@ -280,7 +279,7 @@ class ProductFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Product? product = ProductHolder.of(context)?.product;
+    APIProduct? product = ProductHolder.of(context)?.product;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -345,52 +344,5 @@ class ProductField extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-// En entrée
-abstract class ProductEvent {}
-
-class FetchProductEvent extends ProductEvent {
-  final String barcode;
-
-  FetchProductEvent(this.barcode);
-}
-
-// En sortie
-abstract class ProductState {
-  final Product? product;
-
-  ProductState(this.product);
-}
-
-class InitialState extends ProductState {
-  InitialState() : super(null);
-}
-
-class ProductAvailableState extends ProductState {
-  ProductAvailableState(Product product) : super(product);
-}
-
-class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  // Donner la valeur initiale
-  ProductBloc() : super(InitialState());
-
-  void fetchProduct(String barcode) {
-    add(FetchProductEvent(barcode));
-  }
-
-  @override
-  Stream<ProductState> mapEventToState(ProductEvent event) async* {
-    if (event is FetchProductEvent) {
-      String barcode = event.barcode;
-
-      // Requête
-      yield ProductAvailableState(Product(
-        barcode: barcode,
-        name: 'Petits pois et carottes',
-        brands: <String>['Cassegrain'],
-      ));
-    }
   }
 }
