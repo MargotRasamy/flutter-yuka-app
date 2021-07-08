@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () async {
                       final String scannedBarCode =
                           await FlutterBarcodeScanner.scanBarcode(
-                              '#000000', 'Retour', true, ScanMode.QR);
+                              '#000000', 'Retour', true, ScanMode.BARCODE);
                       BlocProvider.of<ProductBloc>(context)
                           .fetchProduct(scannedBarCode);
                       Navigator.push(
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 27.0,
                       ),
                       TextButton(
-                          // comme je ne sais pas comment tester si le QR code marche, j'ai laissé la possibilité de tester
+                          // comme je ne sais pas comment tester si le Bar code code marche, j'ai laissé la possibilité de tester
                           // l'application avec un produit lambda
                           onPressed: () {
                             BlocProvider.of<ProductBloc>(context)
