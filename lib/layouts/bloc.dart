@@ -91,7 +91,7 @@ class EnterApp extends StatelessWidget {
                       height: 100.0,
                     ),
                     Text(
-                      "PS : Si le chargement ne s'arrête pas, c'est que vous n'avez pas testé le QR code avec votre téléphone. Retournez sur la page d'accueil.",
+                      "PS : Si le chargement ne s'arrête pas, c'est que vous n'avez pas scanné le code bar correctement. Retournez sur la page d'accueil.",
                       style: TextStyle(fontSize: 15),
                       textAlign: TextAlign.center,
                     ),
