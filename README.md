@@ -1,5 +1,7 @@
 # yuka
 
+![vlc_WwaLtKpYbM](https://user-images.githubusercontent.com/47738956/125201602-2894ff80-e270-11eb-9c2b-be752a17517a.png)
+
 Yuka app
 
 ## Getting Started
